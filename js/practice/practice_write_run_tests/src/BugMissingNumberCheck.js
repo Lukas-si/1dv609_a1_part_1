@@ -8,7 +8,9 @@ class Password {
       throw new Error('Too short password')
     }
 
-    //BUG: Missing number check
+    if (!this.#containsNumber(trimmedPW)) {
+      throw new Error('No number found')
+    }
 
     this.#passwordHash = this.#simpleHash(trimmedPW)
   }

@@ -42,7 +42,13 @@ describe('Password class, test suite', () => {
     const areTheySame = testPassword.isPasswordSame(otherPassword)
 
     expect(areTheySame).toBe(false)
+    
+  })
 
+  test('Should throw no number found', () => {
+    const testPassword = () => new Password(validPassword)
+
+    expect(testPassword).not.toThrow()
     
   })
 
