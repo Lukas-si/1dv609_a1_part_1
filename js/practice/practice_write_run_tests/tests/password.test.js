@@ -19,7 +19,7 @@ describe('Password class, test suite', () => {
 
     test('replace this test with one of your own and add more', () => {
         expect(true).toBe(true);
-    });
+    }); // TEST COMMIT 
 
     //Add your tests here
 });
