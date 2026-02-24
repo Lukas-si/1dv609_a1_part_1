@@ -43,14 +43,36 @@ A bug in the SwedishSecurityNumber must not fail due to a bug in SSNHelper.
     * An additional test
 
 
-### Table for checking test suite bug coverage
-| SUT | Test | Correct SwedishSocialSecurityNumber | BuggySSNHelperWrongLength | Buggy Helper 2 | ... | |
-| --- | ---| --- | --- | --- | --- | --- |
-| SwedishSecurityNumber | Test name 1 | ✅ |  |  |  | | 
-| SwedishSecurityNumber | Test name 2 | ✅ |  |  |  | | 
-| SSNHelper  | Test name 3 |  | ✅ | ❌ |  | | |
-| Coverage |  | 100% | 100% | 100% | | |
+### table
 
+## SSNHelper tests
+
+| Version | Correct | BuggySSNHelperAllowDayUpTo30 | BuggySSNHelperAllowMonth0 | BuggySSNHelperIncorrectFormat | BuggySSNHelperMessyLuhn | BuggySSNHelperWrongLength |
+| --- | --- | --- | --- | --- | --- | --- |
+| should allow days from 1 to 31 | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
+| should not allow month to be 0 | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ |
+| should allow months between 1 and 12 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| should accept SSN format 123456-1234 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| should reject incorrect SSN formats | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
+| should accept length of exactly 11 characters | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| should reject SSNs longer than 11 characters | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ |
+| should validate a correct SSN using the Luhn algorithm | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
+| Coverage | 100% | 100% | 100% | 100% | 100% | 100% |
+
+---
+
+## SwedishSocialSecurityNumber tests
+
+| Version | SwedishSocialSecurityNumber | BuggySwedishSocialSecurityNumberNoLenCheck | BuggySwedishSocialSecurityNumberNoTrim | BuggySwedishSocialSecutityNumberNoLuhn | BuggySwedishSocialSecutityNumberWrongYear |
+| --- | --- | --- | --- | --- | --- |
+| should throw if length is incorrect | ✅ | ❌ | ✅ | ✅ | ✅ |
+| should trim the whitespaces | ✅ | ✅ | ❌ | ✅ | ✅ |
+| should not throw error when Luhn validation fails | ✅ | ✅ | ✅ | ❌ | ✅ |
+| should get the correct year when the SSN is valid | ✅ | ✅ | ✅ | ✅ | ❌ |
+| should throw when incorrect format is inputed | ✅ | ✅ | ✅ | ✅ | ✅ |
+| should throw when incorrect day is inputed | ✅ | ✅ | ✅ | ✅ | ✅ |
+| should throw when incorrect month is inputed | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Coverage | 100% | 100% | 100% | 100% | 100% |
 
 
 
