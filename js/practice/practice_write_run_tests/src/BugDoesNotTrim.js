@@ -1,7 +1,7 @@
 class Password {
   #passwordHash
   constructor(pw) {
-    const trimmedPW = pw //Bug does not trim spaces
+    const trimmedPW = pw.trim() //Bug does not trim spaces
 
     if (this.#isTooShort(trimmedPW)) {
       throw new Error('Too short password')
