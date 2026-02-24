@@ -14,12 +14,20 @@ import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/Correct'
 
 describe('Password class, test suite', () => {
-    //put constants here to increase readability
-    const emptyPassword = '';
 
-    test('replace this test with one of your own and add more', () => {
-        expect(true).toBe(true);
-    }); // TEST COMMIT 
+  test('getPasswordHash ShouldReturnHashedValueForValidPassword', () => {
 
-    //Add your tests heredfm,
+    const validPassword = 'abcdefghijkl1m'
+       // >=12 chars and contains number
+    const sut = new Password(validPassword)
+
+    // expected hash using same algorithm
+    let expectedHash = 7
+    for (let i = 0; i < validPassword.length; i++) {
+      expectedHash = expectedHash * 31 + validPassword.charCodeAt(i)
+    }
+
+    expect(sut.getPasswordHash()).toBe(expectedHash)
+  })
+
 });
