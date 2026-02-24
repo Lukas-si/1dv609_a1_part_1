@@ -7,11 +7,11 @@
  // import { Password } from '../src/BugMissingNumberCheck'
 // import { Password } from '../src/BugMissingPasswordCheck'
  // import { Password } from '../src/BugNeverContainsNumbers'
- import { Password } from '../src/BugToShortPassword'
-// import { Password } from '../src/BugVeryShort'
-// import { Password } from '../src/BugWrongHashingAlgorithm'
+ // import { Password } from '../src/BugToShortPassword'
+ //import { Password } from '../src/BugVeryShort'
+ // import { Password } from '../src/BugWrongHashingAlgorithm'
 // import { Password } from '../src/BugWrongMessage'
-// import { Password } from '../src/Correct'
+ // import { Password } from '../src/Correct'
 
 describe('Password class, test suite', () => {
 
@@ -19,6 +19,7 @@ describe('Password class, test suite', () => {
     const notValidPassword = 'brap2'
     const noNumberPassword = 'dfghjghjjhgfdf2ghj'
     const toShortpassword = 'asdfrgtkyh1'
+    const superShortPassword = 'asdfg5'
 
   test('getPasswordHash ShouldReturnHashedValueForValidPassword', () => {
 
@@ -29,7 +30,6 @@ describe('Password class, test suite', () => {
     }
     expect(sut.getPasswordHash()).toBe(expectedHash)
   })
-
   test('check if password are trimming ', () => {
     const testPassword = new Password(validPassword)
     const whiteSpacePassword = new Password(' abcdefghijkl1m ')
@@ -65,6 +65,16 @@ describe('Password class, test suite', () => {
 
   test('Should be too short', () => {
     const testPassword = () => new Password(toShortpassword)
+    expect(testPassword).toThrow('Too short password')
+  })
+
+  test('Should be super short', () => {
+    const testPassword = () => new Password(superShortPassword)
+    expect(testPassword).toThrow('Too short password')
+  })
+
+  test('Should be Wrong message', () => {
+    const testPassword = () => new Password(superShortPassword)
     expect(testPassword).toThrow('Too short password')
   })
 
