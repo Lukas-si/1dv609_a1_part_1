@@ -39,7 +39,7 @@ class Password {
     if (!(other instanceof Password)) {
       throw new Error('Invalid argument')
     }
-    return true
+    return this.getPasswordHash() === other.getPasswordHash()
   }
 }
 
