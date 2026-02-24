@@ -3,8 +3,10 @@ class Password {
 
   constructor(pw) {
     const trimmedPW = pw.trim() // Ta bort mellanslag i början och slutet
-
-    //Bug missing password check
+    
+   if (this.#isTooShort(trimmedPW)) {
+      throw new Error('Too short password')
+    }
 
     if (!this.#containsNumber(trimmedPW)) {
       throw new Error('No number found')

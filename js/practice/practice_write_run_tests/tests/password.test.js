@@ -3,9 +3,9 @@
 
 // import { Password } from '../src/BugDoesNotHash'
  // import { Password } from '../src/BugDoesNotTrim'
-import { Password } from '../src/BugisPasswordAlwaysSame'
-// import { Password } from '../src/BugMissingNumberCheck'
-// import { Password } from '../src/BugMissingPasswordCheck'
+// import { Password } from '../src/BugisPasswordAlwaysSame'
+ // import { Password } from '../src/BugMissingNumberCheck'
+ import { Password } from '../src/BugMissingPasswordCheck'
 // import { Password } from '../src/BugNeverContainsNumbers'
 // import { Password } from '../src/BugToShortPassword'
 // import { Password } from '../src/BugVeryShort'
@@ -15,7 +15,8 @@ import { Password } from '../src/BugisPasswordAlwaysSame'
 
 describe('Password class, test suite', () => {
 
-    const validPassword = 'abcdefghijkl1m' // >=12 chars and contains number
+    const validPassword = 'abcdefghijkl1m' // Global variable 
+    const notValidPassword = 'brap2'
 
   test('getPasswordHash ShouldReturnHashedValueForValidPassword', () => {
 
@@ -49,7 +50,10 @@ describe('Password class, test suite', () => {
     const testPassword = () => new Password(validPassword)
 
     expect(testPassword).not.toThrow()
-    
+  })
+  test('If password are too short', () => {
+    const testPassword = () => new Password(notValidPassword)
+    expect(testPassword).toThrow('Too short password')
   })
 
 });
