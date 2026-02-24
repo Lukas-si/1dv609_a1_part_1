@@ -1,8 +1,8 @@
 
 // Select one of the Password versions to test
 
-import { Password } from '../src/BugDoesNotHash'
-// import { Password } from '../src/BugDoesNotTrim'
+// import { Password } from '../src/BugDoesNotHash'
+ import { Password } from '../src/BugDoesNotTrim'
 // import { Password } from '../src/BugisPasswordAlwaysSame'
 // import { Password } from '../src/BugMissingNumberCheck'
 // import { Password } from '../src/BugMissingPasswordCheck'
@@ -14,20 +14,26 @@ import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/Correct'
 
 describe('Password class, test suite', () => {
+    
+    const validPassword = 'abcdefghijkl1m' // >=12 chars and contains number
 
   test('getPasswordHash ShouldReturnHashedValueForValidPassword', () => {
 
-    const validPassword = 'abcdefghijkl1m'
-       // >=12 chars and contains number
     const sut = new Password(validPassword)
-
     // expected hash using same algorithm
     let expectedHash = 7
     for (let i = 0; i < validPassword.length; i++) {
       expectedHash = expectedHash * 31 + validPassword.charCodeAt(i)
     }
-
     expect(sut.getPasswordHash()).toBe(expectedHash)
+  })
+
+  test('check if password are trimming ', () => {
+    const testPassword = new Password(validPassword)
+    const whiteSpacePassword = new Password(' abcdefghijkl1m ')
+
+ expect(whiteSpacePassword.isPasswordSame(testPassword)).toBe(true)
+
   })
 
 });
